@@ -7,18 +7,15 @@ var answerContainer2 = document.getElementById("answer2");
 var answerContainer3 = document.getElementById("answer3");
 var answerContainer4 = document.getElementById("answer4");
 var answerContainersAll = [answerContainer1, answerContainer2, answerContainer3, answerContainer4];
+var startButton = document.getElementById("start");
 
 var question1;
 var question2;
 var question3;
-
-registerQuestions();
-
-var possibleQuestions = [question1, question2, question3];
+var possibleQuestions = [];
 var possibleAnswers = [];
 
-randomQuestion();
-
+registerQuestions();
 
 function randomQuestion() {
     var indexQuestion = Math.floor(Math.random() * possibleQuestions.length);
@@ -63,12 +60,38 @@ function submitCorrect() {
         answerContainersAll[a].setAttribute("onclick", "");
     }
 
-    randomQuestion();
+    //checks if all of the questions have been answered
+    if (possibleQuestions[0] === undefined) {
+        gameEnd();
+    } else {
+        randomQuestion();
+    }
 }
 
 
 function submitWrong() {
     console.log("Wrong answer submitted");
+}
+
+
+function gameStart() {
+    //Shows all answer buttons
+    for (var i = 0; i < answerContainersAll.length; i++) {
+        answerContainersAll[i].style.visibility = "visible";
+    }
+    startButton.style.visibility = "hidden";
+    registerQuestions();
+    randomQuestion();
+}
+
+
+function gameEnd() {
+    //Hides all answer buttons
+    for (var i = 0; i < answerContainersAll.length; i++) {
+        answerContainersAll[i].style.visibility = "hidden";
+    }
+    questionContainer.innerHTML = "Press the button below to begin";
+    startButton.style.visibility = "visible";
 }
 
 
@@ -79,6 +102,7 @@ function registerQuestions() {
         answerCorrect: "Correct",
         answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
     }
+    possibleQuestions.push(question1);
     
     question2 = {
         question: "This is a second test question",
@@ -86,6 +110,7 @@ function registerQuestions() {
         answerCorrect: "Correct",
         answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
     }
+    possibleQuestions.push(question2);
 
     question3 = {
         question: "This is a third test question",
@@ -93,4 +118,5 @@ function registerQuestions() {
         answerCorrect: "Correct",
         answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
     }
+    possibleQuestions.push(question3);
 }
