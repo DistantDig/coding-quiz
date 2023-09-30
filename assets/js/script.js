@@ -15,8 +15,6 @@ var question3;
 var possibleQuestions = [];
 var possibleAnswers = [];
 
-registerQuestions();
-
 function randomQuestion() {
     var indexQuestion = Math.floor(Math.random() * possibleQuestions.length);
     var indexCorrectAnswer = Math.floor(Math.random() * answerContainersAll.length);
@@ -75,6 +73,7 @@ function submitWrong() {
 
 
 function gameStart() {
+    console.log("Starting new game")
     //Shows all answer buttons
     for (var i = 0; i < answerContainersAll.length; i++) {
         answerContainersAll[i].style.visibility = "visible";
