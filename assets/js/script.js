@@ -74,8 +74,7 @@ function renderScoreboard() {
 function compareScores() {
     for (var i = 0; i < scoreboard.length; i++) {
         if (newPlace.score > scoreboard[i].score) {
-            scoreboard[i].score = newPlace.score;
-            scoreboard[i].initials = newPlace.initials;
+            scoreboard.unshift(newPlace);
             return;
         }
     }
@@ -260,33 +259,33 @@ function registerScores() {
     scoreboard.push(fifthPlace);
 
     newPlace = {
-        initials: "test",
-        score: 60
+        initials: "N/A",
+        score: 0
     }
 }
 
 function registerQuestions() {
     question1 = { 
-        question: "This is the first question",
+        question: "How would you write an alert?",
     
-        answerCorrect: "Correct",
-        answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
+        answerCorrect: "alert(\"Text here\");",
+        answerWrong: ["alert = Text here;", "alert = \"Text here\";", "previous.alert(Text Here);", "previous.alert(\"Text Here\");"]
     }
     possibleQuestions.push(question1);
     
     question2 = {
-        question: "This is a second test question",
+        question: "How would you declar a variable in JavaScript?",
     
-        answerCorrect: "Correct",
-        answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
+        answerCorrect: "var myVariable;",
+        answerWrong: ["var = myVariable;", "int myVariable;", "int = myVariable;", "var(myVarable);"]
     }
     possibleQuestions.push(question2);
 
     question3 = {
-        question: "This is a third test question",
+        question: "How do you test if a value AND they type of vaiables are equal?",
     
-        answerCorrect: "Correct",
-        answerWrong: ["Wrong1", "Wrong2", "Wrong3", "Wrong4"]
+        answerCorrect: "===",
+        answerWrong: ["=", "==", "!=", "===="]
     }
     possibleQuestions.push(question3);
 }
