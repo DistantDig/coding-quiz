@@ -44,6 +44,7 @@ var possibleAnswers = [];
 registerScores();
 
 function newScoreSubmit(event) {
+    // event.preventDefault();
     newPlace.initials = initialsInput.value;
     newPlace.score = timeLeft;
     compareScores();
