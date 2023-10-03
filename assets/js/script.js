@@ -8,6 +8,8 @@ var answerContainer3 = document.getElementById("answer3");
 var answerContainer4 = document.getElementById("answer4");
 var answerContainersAll = [answerContainer1, answerContainer2, answerContainer3, answerContainer4];
 
+var timerContainer = document.getElementById("timer");
+
 var scoreboardContainer = document.getElementById("scoreboard");
 var placeFirstContainer = document.getElementById("first-place");
 var placeSecondContainer = document.getElementById("second-place");
@@ -21,6 +23,9 @@ var initialsInput = document.getElementById("initials-input");
 
 var startButton = document.getElementById("start");
 var scoreboardButton = document.getElementById("scoreboad-button");
+
+var timeLeft = 0;
+var timeInterval;
 
 var firstPlace;
 var secondPlace;
@@ -41,7 +46,7 @@ registerScores();
 function newScoreSubmit(event) {
     event.preventDefault();
     newPlace.initials = initialsInput.value;
-    newPlace.score = 10; //number placeholder
+    newPlace.score = timeLeft;
     compareScores();
     showScoreboard();
     renderScoreboard();
@@ -128,6 +133,12 @@ function submitCorrect() {
 
 
 function submitWrong() {
+    if (timeLeft - 5 <= 0) {
+        timeLeft = 0;
+    } else {
+        timeLeft -= 5;
+    }
+    timerContainer.innerHTML = "Time Remaining: " + timeLeft;
     console.log("Wrong answer submitted");
 }
 
@@ -139,12 +150,16 @@ function gameStart() {
         answerContainersAll[i].style.visibility = "visible";
     }
     startButton.style.visibility = "hidden";
+    timeLeft = 60;
+    timerContainer.innerHTML = "Time Remaining: " + timeLeft;
     registerQuestions();
     randomQuestion();
+    startTimer();
 }
 
 
 function gameEnd() {
+    clearInterval(timeInterval);
     //Hides all answer buttons
     for (var i = 0; i < answerContainersAll.length; i++) {
         answerContainersAll[i].style.visibility = "hidden";
@@ -152,7 +167,18 @@ function gameEnd() {
     questionContainer.innerHTML = "Press the button below to begin";
     gameContainer.style.visibility = "hidden";
     initialsInputContainer.style.visibility = "visible";
-     
+}
+
+function startTimer() {
+    timeInterval = setInterval( function () {
+        timeLeft--;
+        timerContainer.innerHTML = "Time Remaining: " + timeLeft;
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+            timerContainer.innerHTML = "Time Remaining: " + timeLeft;
+            gameEnd();
+        }
+    }, 1000);
 }
 
 function registerScores() {
