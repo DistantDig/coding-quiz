@@ -44,13 +44,25 @@ var possibleAnswers = [];
 registerScores();
 
 function newScoreSubmit(event) {
-    event.preventDefault();
     newPlace.initials = initialsInput.value;
     newPlace.score = timeLeft;
     compareScores();
-    showScoreboard();
+    storeScores();
     renderScoreboard();
-    console.log(newPlace);
+}
+
+function storeScores() {
+    localStorage.setItem("firstPlace-score", scoreboard[0].score);
+    localStorage.setItem("secondPlace-score", scoreboard[1].score);
+    localStorage.setItem("thirdPlace-score", scoreboard[2].score);
+    localStorage.setItem("fourthPlace-score", scoreboard[3].score);
+    localStorage.setItem("fifthPlace-score", scoreboard[4].score);
+
+    localStorage.setItem("firstPlace-initials", scoreboard[0].initials);
+    localStorage.setItem("secondPlace-initials", scoreboard[1].initials);
+    localStorage.setItem("thirdPlace-initials", scoreboard[2].initials);
+    localStorage.setItem("fourthPlace-initials", scoreboard[3].initials);
+    localStorage.setItem("fifthPlace-initials", scoreboard[4].initials);
 }
 
 function renderScoreboard() {
@@ -182,33 +194,68 @@ function startTimer() {
 }
 
 function registerScores() {
-    firstPlace = {
-        initials: "N/A",
-        score: 0
+    if (localStorage.getItem("firstPlace-initials") == undefined || localStorage.getItem("firstPlace-initials") == null) {
+        firstPlace = {
+            initials: "N/A",
+            score: 0
+        }
+    } else {
+        firstPlace = {
+            initials: localStorage.getItem("firstPlace-initials"),
+            score: localStorage.getItem("firstPlace-score"),
+        }
     }
     scoreboard.push(firstPlace);
 
-    secondPlace = {
-        initials: "N/A",
-        score: 0
+    if (localStorage.getItem("secondPlace-initials") == undefined || localStorage.getItem("secondPlace-initials") == null) {
+        secondPlace = {
+            initials: "N/A",
+            score: 0
+        }
+    } else {
+        secondPlace = {
+            initials: localStorage.getItem("secondPlace-initials"),
+            score: localStorage.getItem("secondPlace-score"),
+        }
     }
     scoreboard.push(secondPlace);
 
-    thirdPlace = {
-        initials: "N/A",
-        score: 0
+    if (localStorage.getItem("thirdPlace-initials") == undefined || localStorage.getItem("thirdPlace-initials") == null) {
+        thirdPlace = {
+            initials: "N/A",
+            score: 0
+        }
+    } else {
+        thirdPlace = {
+            initials: localStorage.getItem("thirdPlace-initials"),
+            score: localStorage.getItem("thirdPlace-score"),
+        }
     }
     scoreboard.push(thirdPlace);
 
-    fourthPlace = {
-        initials: "N/A",
-        score: 0
+    if (localStorage.getItem("fourthPlace-initials") == undefined || localStorage.getItem("fourthPlace-initials") == null) {
+        fourthPlace = {
+            initials: "N/A",
+            score: 0
+        }
+    } else {
+        fourthPlace = {
+            initials: localStorage.getItem("fourthPlace-initials"),
+            score: localStorage.getItem("fourthPlace-score"),
+        }
     }
     scoreboard.push(fourthPlace);
 
-    fifthPlace = {
-        initials: "N/A",
-        score: 0
+    if (localStorage.getItem("fifthPlace-initials") == undefined || localStorage.getItem("fifthPlace-initials") == null) {
+        fifthPlace = {
+            initials: "N/A",
+            score: 0
+        }
+    } else {
+        fifthPlace = {
+            initials: localStorage.getItem("fifthPlace-initials"),
+            score: localStorage.getItem("fifthPlace-score"),
+        }
     }
     scoreboard.push(fifthPlace);
 
