@@ -1,19 +1,79 @@
 console.log("Script linked");
 
-var gameContainer = document.getElementById("container");
+var gameContainer = document.getElementById("game-container");
 var questionContainer = document.getElementById("question");
 var answerContainer1 = document.getElementById("answer1");
 var answerContainer2 = document.getElementById("answer2");
 var answerContainer3 = document.getElementById("answer3");
 var answerContainer4 = document.getElementById("answer4");
 var answerContainersAll = [answerContainer1, answerContainer2, answerContainer3, answerContainer4];
+
+var scoreboardContainer = document.getElementById("scoreboard");
+var placeFirstContainer = document.getElementById("first-place");
+var placeSecondContainer = document.getElementById("second-place");
+var placeThirdContainer = document.getElementById("third-place");
+var placeFourthContainer = document.getElementById("fourth-place");
+var placeFifthContainer = document.getElementById("fifth-place");
+var placeContainterAll = [placeFirstContainer, placeSecondContainer, placeThirdContainer, placeFourthContainer, placeFifthContainer];
+
+var initialsInputContainer = document.getElementById("form-container");
+var initialsInput = document.getElementById("initials-input");
+
 var startButton = document.getElementById("start");
+var scoreboardButton = document.getElementById("scoreboad-button");
+
+var firstPlace;
+var secondPlace;
+var thirdPlace;
+var fourthPlace;
+var fifthPlace;
+var newPlace;
+var scoreboard = [];
 
 var question1;
 var question2;
 var question3;
 var possibleQuestions = [];
 var possibleAnswers = [];
+
+registerScores();
+
+function newScoreSubmit(event) {
+    event.preventDefault();
+    newPlace.initials = initialsInput.value;
+    newPlace.score = 10; //number placeholder
+    compareScores();
+    showScoreboard();
+    renderScoreboard();
+    console.log(newPlace);
+}
+
+function renderScoreboard() {
+    for (var i = 0; i < scoreboard.length; i++) {
+        placeContainterAll[i].innerHTML = scoreboard[i].initials + ": " + scoreboard[i].score;
+    }
+}
+
+function compareScores() {
+    for (var i = 0; i < scoreboard.length; i++) {
+        if (newPlace.score > scoreboard[i].score) {
+            scoreboard[i].score = newPlace.score;
+            scoreboard[i].initials = newPlace.initials;
+            return;
+        }
+    }
+}
+
+function showScoreboard() {
+    renderScoreboard();
+    if (scoreboardContainer.style.visibility === "visible") {
+        scoreboardContainer.style.visibility = "hidden";
+        gameContainer.style.visibility = "visible";
+    } else {
+        scoreboardContainer.style.visibility = "visible";
+        gameContainer.style.visibility = "hidden";
+    }
+}
 
 function randomQuestion() {
     var indexQuestion = Math.floor(Math.random() * possibleQuestions.length);
@@ -90,9 +150,47 @@ function gameEnd() {
         answerContainersAll[i].style.visibility = "hidden";
     }
     questionContainer.innerHTML = "Press the button below to begin";
-    startButton.style.visibility = "visible";
+    gameContainer.style.visibility = "hidden";
+    initialsInputContainer.style.visibility = "visible";
+     
 }
 
+function registerScores() {
+    firstPlace = {
+        initials: "N/A",
+        score: 0
+    }
+    scoreboard.push(firstPlace);
+
+    secondPlace = {
+        initials: "N/A",
+        score: 0
+    }
+    scoreboard.push(secondPlace);
+
+    thirdPlace = {
+        initials: "N/A",
+        score: 0
+    }
+    scoreboard.push(thirdPlace);
+
+    fourthPlace = {
+        initials: "N/A",
+        score: 0
+    }
+    scoreboard.push(fourthPlace);
+
+    fifthPlace = {
+        initials: "N/A",
+        score: 0
+    }
+    scoreboard.push(fifthPlace);
+
+    newPlace = {
+        initials: "test",
+        score: 60
+    }
+}
 
 function registerQuestions() {
     question1 = { 
