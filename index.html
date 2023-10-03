@@ -8,13 +8,30 @@
 
     <body>
         <h1>Coding Quiz!</h1>
-        <div id="container">
+        <button id="scoreboard-button" onclick="showScoreboard()">Show Scoreboard</button>
+        <div id="game-container">
             <p id="question">Press the button below to begin</p>
             <button id="answer1" onclick="" style="visibility: hidden;"></button>
             <button id="answer2" onclick="" style="visibility: hidden;"></button>
             <button id="answer3" onclick="" style="visibility: hidden;"></button>
             <button id="answer4" onclick="" style="visibility: hidden;"></button>
             <button id="start" onclick="gameStart()">Start Game</button>
+        </div>
+        <div id="form-container" onsubmit="newScoreSubmit(event)" style="visibility: hidden;">
+            <form>
+                <input type="text" id="initials-input" required>
+                <input type="submit">
+            </form>
+        </div>
+        <div id="scoreboard" style="visibility: hidden;">
+            <h3>Top Scores:</h3>
+            <ol>
+                <li id="first-place"></li>
+                <li id="second-place"></li>
+                <li id="third-place"></li>
+                <li id="fourth-place"></li>
+                <li id="fifth-place"></li>
+            </ol>
         </div>
     </body>
 

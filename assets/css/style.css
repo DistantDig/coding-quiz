@@ -2,7 +2,9 @@ h1{
     text-align: center;
 }
 
-#container {
+#game-container,
+#initials-input,
+#scoreboard {
     display: block;
     margin-left: auto;
     margin-right: auto;
